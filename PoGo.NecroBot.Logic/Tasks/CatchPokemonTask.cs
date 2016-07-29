@@ -53,19 +53,19 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if ((isLowProbability && isHighCp) || isHighPerfection)
                 {
-                    await UseBerry(session, encounter is EncounterResponse ? pokemon.EncounterId : encounterId,
-                        encounter is EncounterResponse ? pokemon.SpawnPointId : currentFortData?.Id);
+                    await UseBerry(session, encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.EncounterId : encounterId,
+                        encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.SpawnPointId : currentFortData?.Id);
                 }
 
                 var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                     session.Client.CurrentLongitude,
-                    encounter is EncounterResponse ? pokemon.Latitude : currentFortData.Latitude,
-                    encounter is EncounterResponse ? pokemon.Longitude : currentFortData.Longitude);
+                    encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.Latitude : currentFortData.Latitude,
+                    encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.Longitude : currentFortData.Longitude);
 
                 caughtPokemonResponse =
                     await session.Client.Encounter.CatchPokemon(
-                        encounter is EncounterResponse ? pokemon.EncounterId : encounterId,
-                        encounter is EncounterResponse ? pokemon.SpawnPointId : currentFortData.Id, pokeball);
+                        encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.EncounterId : encounterId,
+                        encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.SpawnPointId : currentFortData.Id, pokeball);
 
                 var evt = new PokemonCaptureEvent {Status = caughtPokemonResponse.Status};
 
@@ -103,8 +103,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
 
                 evt.CatchType = encounter is EncounterResponse
-                    ? session.Translations.GetTranslation(Common.TranslationString.CatchTypeNormal)
-                    : encounter is DiskEncounterResponse ? session.Translations.GetTranslation(Common.TranslationString.CatchTypeLure) : session.Translations.GetTranslation(Common.TranslationString.CatchTypeIncense);
+                    ? session.Translation.GetTranslation(Common.TranslationString.CatchTypeNormal)
+                    : encounter is DiskEncounterResponse ? session.Translation.GetTranslation(Common.TranslationString.CatchTypeLure) : session.Translation.GetTranslation(Common.TranslationString.CatchTypeIncense);
                 evt.Id = encounter is EncounterResponse ? pokemon.PokemonId : encounter?.PokemonData.PokemonId;
                 evt.Level =
                     PokemonInfo.GetLevel(encounter is EncounterResponse
@@ -133,7 +133,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 session.EventDispatcher.Send(evt);
 
                 attemptCounter++;
-                await Task.Delay(2000);
+                
+                DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 2000);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }

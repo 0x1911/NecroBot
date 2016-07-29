@@ -25,6 +25,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var curTrk = 0;
             var maxTrk = tracks.Count - 1;
             var curTrkSeg = 0;
+            var eggWalker = new EggWalker(1000, session);
             while (curTrk <= maxTrk)
             {
                 var track = tracks.ElementAt(curTrk);
@@ -45,7 +46,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         {
                             session.EventDispatcher.Send(new ErrorEvent
                             {
-                                Message = session.Translations.GetTranslation(Common.TranslationString.DesiredDestTooFar, nextPoint.Lat, nextPoint.Lon, session.Client.CurrentLatitude, session.Client.CurrentLongitude)
+                                Message = session.Translation.GetTranslation(Common.TranslationString.DesiredDestTooFar, nextPoint.Lat, nextPoint.Lon, session.Client.CurrentLatitude, session.Client.CurrentLongitude)
                             });
                             break;
                         }
@@ -63,7 +64,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             var pokeStop = pokestopList[0];
                             pokestopList.RemoveAt(0);
 
-                            await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                            var fortInfo = await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
                             if (pokeStop.LureInfo != null)
                             {
@@ -77,6 +78,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 session.EventDispatcher.Send(new FortUsedEvent
                                 {
+                                    Id = pokeStop.Id,
+                                    Name = fortInfo.Name,
                                     Exp = fortSearch.ExperienceAwarded,
                                     Gems = fortSearch.GemsAwarded,
                                     Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded),
@@ -91,9 +94,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             await RecycleItemsTask.Execute(session);
 
-                            if (session.LogicSettings.UseEggIncubators)
+                            if (session.LogicSettings.SnipeAtPokestops)
                             {
-                                await UseIncubatorsTask.Execute(session);
+                                await SnipePokemonTask.Execute(session);
                             }
 
                             if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
@@ -123,6 +126,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 return true;
                             }
                             );
+
+                        await eggWalker.ApplyDistance(distance);
 
                         if (curTrkPt >= maxTrkPt)
                             curTrkPt = 0;

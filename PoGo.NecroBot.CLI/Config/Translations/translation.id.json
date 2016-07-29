@@ -18,47 +18,47 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "AuthType in config.json is onbekend."
+      "Value": "AuthType salah pada config.json"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Buiten het ingestelde bereik beland! Terug naar beginpunt ({0}m away) in 5 seconden. Klopt je Coords.ini bestand?"
+      "Value": "Kamu di luar dari radius yang kamu tentukan! Jalan ke tempat awal (sekitar {0}m) dalam 5 detik. Apakah file Coords.ini kamu benar?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Geen geschikte PokeStops gevonden in je omgeving. Is je bereik te klein?"
+      "Value": "Tidak ada PokeStop yang bisa digunakan di sekitarmu. Apakah jarak maksimal terlalu kecil?"
     },
     {
       "Key": "eventFortUsed",
-      "Value": "XP: {0}, Gems: {1}, Items: {2}"
+      "Value": "XP: {0}, Gem: {1}, Item: {2}"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Buitmaken mislukt, mogelijke softban. Opnieuw proberen: {0}/40"
+      "Value": "Gagal mengambil item, kemungkinan softban. Mengulang: {0}/40"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} na ({1}m)"
+      "Value": "{0} dalam ({1}m)"
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "Ingelogd als {0}"
+      "Value": "Bermain sebagai {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Lucky Egg gebruikt, resterend: {0}"
+      "Value": "Memakai Lucky Egg, tersisa: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} successvol voor {1}xp"
+      "Value": "{0} berhasil untuk {1}xp"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "Mislukt {0}. Resultaat was {1}, gestopt met evolueren {2}"
+      "Value": "Gagal {0}. Hasilnya adalah {1}, menghentikan evolusi {2}"
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [Beste CP: {3}  IV: {4}%] (Candies: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [CP terbaik: {3}  IV: {4}%] (Candies: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -66,15 +66,15 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kans: {7}% | Afstand: {8}m | gevangen met een {9} ({10} resterend). | {11}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | jarak {8}m | dengan sebuah {9} (tersisa {10}). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Geen Pokeballs resterend - Een {0} met CP {1} misgelopen "
+      "Value": "Pokeballs habis - {0} dengan CP {1} tidak dapat ditangkap"
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "{0} Poging #{1}"
+      "Value": "{0} Mencoba #{1}"
     },
     {
       "Key": "catchStatus",
@@ -86,43 +86,43 @@
     },
     {
       "Key": "unhandledGpxData",
-      "Value": "Ongehanteerde data in GPX bestand, poging tot overslaan."
+      "Value": "Data tidak dapat di-handle pada file GPX, mencoba tanpa file GPX..."
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "Pokemons"
+      "Value": "Pokemon"
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "perfect"
+      "Value": "sempurna"
     },
     {
       "Key": "commonWordName",
-      "Value": "naam"
+      "Value": "nama"
     },
     {
       "Key": "displayHighestsCpHeader",
-      "Value": "ToonHoogsteCP"
+      "Value": "Menampilkan CP terbesar"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "ToonHoogstePerfect"
+      "Value": "Menampilkan yang terbaik di kelasnya"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "ToonHoogsteLevel"
+      "Value": "Menampilkan level terbesar"
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Controleer of Lat & Lng kloppen. Sluit programma als dat niet zo is! Lat: {0} Lng: {1}"
+      "Value": "Pastikan Lat dan Lng benar. Tutup program jika tidak! Lat: {0} Lng: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Ei in broedmachine stoppen: {0:0.00}km resterend"
+      "Value": "Memasukkan egg ke dalam incubator: jarak yang harus ditempuh {0:0.00}km"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Broedmachine status update: {0:0.00}km resterend"
+      "Value": "Update status incubator: jarak yang harus ditempuh {0:0.00}km"
     }
   ]
 }
